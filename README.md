@@ -1,32 +1,30 @@
 interview_tools
 ===============
 
-The goal for this repo is to have a ton of tools and algorithms ready to make online interviews a breeze.
-
-If you are an engineer and are about to interview me, good luck!
+Tools to make online interviews easy.
 
 # Tools
 
 ## Copier
 
-The first and most important step is to find a way to copy text from a local file to a code-sharing website. This allows me to edit quickly and in my native environment, lets me do such things as write and run tests and import libraries.
+The first and most important step is to find a way to copy text from a local file to a code-sharing website. This enables editing in our native environment, which means we get to use our favorite editor, we can write and run tests, and we can import modules.
 
-Copier opens a browser, watches the directory it is run from, and whenever it sees a file is changed, copies the contents of that file to the online editor.
+Copier opens a browser and watches a file for changes, copying the contents of that file to the online editor on change.
 
 ### Usage
 
 ```
 pip install -r requirements.txt
-python copier [url]
+python copier [url] [file_to_copy]
 ```
 
-Then open up a new file and start editing. Note, only one file works at a time.
+Then open up `file_to_copy` and start editing.
 
 ### Notes
 
-At the moment, only collabedit and stypi are supported. Please check `copier.py` for the most recent list. Also note, much of the support is limited. Again, refer to the source for details.
+At the moment, only collabedit and stypi are supported. Please check `copier.py` for the most recent list. Support is limited for some sites. Again, refer to the source for details.
 
-Also, because the copier is based on [easywatch](https://github.com/Ceasar/easywatch), if you are using vim you will need to disable backup files. To do so, add the following to your `.vimrc`.
+Also, because the copier is based on [easywatch](https://github.com/Ceasar/easywatch), vim-users will need to disable backup files. To do so, add the following to your `.vimrc`.
 
 ```
 set nobackup " Do not make a backup before overwriting a file
