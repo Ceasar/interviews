@@ -86,23 +86,34 @@ def get_handler(driver, domain):
         return collabedit(driver)
 
 
+# For whatever reason, Chrome cannot open collabedit, so we use Firefox
+def get_driver(domain):
+    """Get the appropriate driver for a website."""
+    if "collabedit" in domain:
+        return webdriver.Firefox()
+    else:
+        return webdriver.Chrome()
+
+
 def main(args):
     try:
-        domain = args[1]
-    except:
-        raise "usage: python copier [url]"
+        url = args[1]
+        filename = args[2]
+    except IndexError:
+        raise ValueError("usage: python copier `url` `filename`")
     try:
-        driver = webdriver.Firefox()
+        driver = get_driver(url)
 
-        print "loading %s..." % domain
+        print "loading %s..." % url
         driver.execute_script('window.onbeforeunload = function() {}')
-        driver.get(domain)
+        driver.get(url)
         print "getting handler..."
-        h = get_handler(driver, domain)
+        h = get_handler(driver, url)
         print "loaded %s..." % driver.current_url
 
         def handler(event_type, src_path):
-            if event_type == "modified":
+            # TODO: filename in src_path might be a little insecure
+            if event_type == "modified" and filename in src_path:
                 with open(src_path) as f:
                     contents = f.read()
                     h(contents)
